@@ -36,18 +36,14 @@ int main(void) {
   }
 
   for (int i = 0; i < dims; i++) {
-    // cout << "1";
     coeff_mat[i][i] = -1.0;
     if (paths_from.find(i) != paths_from.end())
       continue;
-    // cout << "2" << endl;
     for (int j = 1; j <= dice_sides; j++) {
       if (i-j < 0)
         continue;
       coeff_mat[i][i-j] = 1.0 / (double)dice_sides;
-      // cout << 1.0 / (double)dice_sides << endl;
     }
-    // cout << "3" << endl;
     if (paths_to.find(i) != paths_to.end()) {
       for (int j = 1; j <= dice_sides; j++) {
         if (paths_to[i] - j < 0)
@@ -56,6 +52,7 @@ int main(void) {
       }
     }
   }
+  
   output << setprecision(6) << fixed;
   for (size_t i = 0; i < dims; i++) {
     for (size_t j = 0; j < dims; j++) {
