@@ -15,7 +15,7 @@ class Equation:
         return sum
 
 # Generate all functions to solve the system
-def genLambdas(filename="matrix.csv"):
+def genLambdas(filename="coeffmat.csv"):
     # Read the matrix in
     mat = np.genfromtxt(filename, delimiter=" ")
     
@@ -23,7 +23,7 @@ def genLambdas(filename="matrix.csv"):
     eig_val, eig_vec = np.linalg.eig(mat)
 
     # Init initial conditions
-    init = np.zeros((4,1))
+    init = np.zeros((len(eig_val),1))
     init[0][0] = 1
     
     # Inverse of the eigen vector matrix
