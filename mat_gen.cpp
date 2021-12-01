@@ -2,7 +2,7 @@
 #include <fstream>
 #include <map>
 #include <vector>
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 
 using namespace std;
@@ -52,7 +52,7 @@ int main(void) {
       }
     }
   }
-  
+
   output << setprecision(6) << fixed;
   for (size_t i = 0; i < dims; i++) {
     for (size_t j = 0; j < dims; j++) {
