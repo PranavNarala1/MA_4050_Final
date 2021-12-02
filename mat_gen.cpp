@@ -2,7 +2,7 @@
 #include <fstream>
 #include <map>
 #include <vector>
-#include <math.h>
+#include <cmath>
 #include <iomanip>
 
 using namespace std;
@@ -35,25 +35,26 @@ int main(void) {
     paths_to[in2] = in1;
   }
 
+   output << setprecision(10) << fixed;
+
   for (int i = 0; i < dims; i++) {
-    coeff_mat[i][i] = -1.0;
-    if (paths_from.find(i) != paths_from.end())
-      continue;
+    coeff_mat[i][i] = -(double)min(dims - i - 1, dice_sides)/ (double)dice_sides;
+    // if (paths_from.find(i) != paths_from.end())
+    //   continue;
     for (int j = 1; j <= dice_sides; j++) {
       if (i-j < 0)
         continue;
       coeff_mat[i][i-j] = 1.0 / (double)dice_sides;
     }
-    if (paths_to.find(i) != paths_to.end()) {
-      for (int j = 1; j <= dice_sides; j++) {
-        if (paths_to[i] - j < 0)
-          continue;
-        coeff_mat[i][paths_to[i] - j] = 1.0 / (double)dice_sides;
-      }
-    }
+    // if (paths_to.find(i) != paths_to.end()) {
+    //   for (int j = 1; j <= dice_sides; j++) {
+    //     if (paths_to[i] - j < 0)
+    //       continue;
+    //     coeff_mat[i][paths_to[i] - j] = 1.0 / (double)dice_sides;
+    //   }
+    // }
   }
-  
-  output << setprecision(6) << fixed;
+
   for (size_t i = 0; i < dims; i++) {
     for (size_t j = 0; j < dims; j++) {
       output << (double)coeff_mat[i][j] << " ";
