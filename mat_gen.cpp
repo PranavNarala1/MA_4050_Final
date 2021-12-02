@@ -35,7 +35,7 @@ int main(void) {
     paths_to[in2] = in1;
   }
 
-   output << setprecision(10) << fixed;
+   output << setprecision(6) << fixed;
 
   for (int i = 0; i < dims; i++) {
     coeff_mat[i][i] = -(double)min(dims - i - 1, dice_sides)/ (double)dice_sides;
