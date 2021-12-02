@@ -45,9 +45,14 @@ class Cos:
 def genLambdas(filename="coeffmat.csv"):
     # Read the matrix in
     mat = np.genfromtxt(filename, delimiter=" ")
+
+    print(mat.dtype)
     
     # Calculate eigenvalues and eigenvectors
     eig_val, eig_vec = np.linalg.eig(mat)
+
+    print(eig_val[0])
+    print(eig_vec[0])
 
     # Init initial conditions
     init = np.zeros((len(eig_val),1))
@@ -72,8 +77,6 @@ def genLambdas(filename="coeffmat.csv"):
         # Generate each term and append
         for j in range(len(eig_val)):
             const_terms.append(int_consts[j][0] * eig_vec[i][j])
-
-
             if abs(eig_val[j]) > 1e-10:
                 #terms.append(f"({int_consts[j][0]})({eig_vec[i][j]})e^{{{eig_val[j]}t}}")
                 exp_terms.append(eig_val[j])
@@ -89,8 +92,5 @@ def genLambdas(filename="coeffmat.csv"):
     return equs
 
 if __name__ == "__main__":
-    equs = genLambdas("testMat.csv")
-    for e in equs:
-        print(e.constants)
-        print(e.exponents)
-        print()
+    equs = genLambdas()
+    #print(equs[0](0))
