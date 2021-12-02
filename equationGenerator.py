@@ -14,6 +14,33 @@ class Equation:
         
         return sum
 
+# An exponential of the form ae^bx
+class Exp:
+    def __init__(self, constant, exponent):
+        self.constant = constant
+        self.exponent = exponent
+    
+    def __call__(self, t):
+        return self.constant * np.exp(self.exponent * t)
+
+# A sine function of the form a*sin(bx)
+class Sin:
+    def __init__(self, constant, inside):
+        self.constant = constant
+        self.inside = inside
+    
+    def __call__(self, t):
+        return self.constant * np.sin(self.inside * t)
+
+# A cosine function of the form a*cos(bx)
+class Cos:
+    def __init__(self, constant, inside):
+        self.constant = constant
+        self.inside = inside
+    
+    def __call__(self, t):
+        return self.constant * np.cos(self.inside * t)
+
 # Generate all functions to solve the system
 def genLambdas(filename="coeffmat.csv"):
     # Read the matrix in
@@ -45,6 +72,8 @@ def genLambdas(filename="coeffmat.csv"):
         # Generate each term and append
         for j in range(len(eig_val)):
             const_terms.append(int_consts[j][0] * eig_vec[i][j])
+
+
             if abs(eig_val[j]) > 1e-10:
                 #terms.append(f"({int_consts[j][0]})({eig_vec[i][j]})e^{{{eig_val[j]}t}}")
                 exp_terms.append(eig_val[j])
@@ -60,4 +89,8 @@ def genLambdas(filename="coeffmat.csv"):
     return equs
 
 if __name__ == "__main__":
-    genLambdas()
+    equs = genLambdas("testMat.csv")
+    for e in equs:
+        print(e.constants)
+        print(e.exponents)
+        print()
