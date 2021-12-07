@@ -42,6 +42,6 @@ def genLambdas(filename="coeffmat.csv"):
     return pd.DataFrame(state_list)
 
 if __name__ == "__main__":
-    table = genLambdas()
-    print(table.head(3))
-    print(table.tail(3))
+    table = genLambdas("coeffmatBAK.csv")
+    print(table.head(10))
+    print(table.tail(10))
