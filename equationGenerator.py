@@ -20,7 +20,7 @@ def genLambdas(filename="coeffmat.csv"):
 
     # Loop over conditions
     while t < t_max:
-        # RK4
+        # RK4, modeled after https://www.youtube.com/watch?v=0LzDiScAcJI
         v1 = np.matmul(mat, state)
         v2 = np.matmul(mat, state + dt/2 * v1)
         v3 = np.matmul(mat, state + dt/2 * v2)
@@ -44,3 +44,4 @@ def genLambdas(filename="coeffmat.csv"):
 if __name__ == "__main__":
     table = genLambdas()
     print(table.head(3))
+    print(table.tail(3))
